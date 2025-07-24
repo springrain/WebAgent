@@ -17,19 +17,19 @@ ROOT_RESOURCE = os.path.join(os.path.dirname(__file__), 'resource')
 
 
 
-def init_dev_search_agent_service(name: str = 'SEARCH', port: int = 8002, desc: str = '初版', reasoning: bool = True, max_llm_calls: int = 20, tools = ['search', 'visit'], addtional_agent = None):
+def init_dev_search_agent_service(model: str="WebDancer-QwQ-32B", base_url: str = "http://127.0.0.1:8004/v1", api_key:str='EMPTY',desc: str = '初版', reasoning: bool = True, max_llm_calls: int = 20, tools = ['search', 'visit'], addtional_agent = None):
     llm_cfg = TextChatAtOAI({
-        'model': '',
+        'model': model,
         'model_type': 'oai',
-        'model_server': f'http://127.0.0.1:{port}/v1',
-        'api_key': 'EMPTY',
+        'model_server': base_url,
+        'api_key': api_key,
         'generate_cfg': {
             'fncall_prompt_type': 'nous',
             'temperature': 0.6,
             'top_p': 0.95,
             'top_k': -1,
             'repetition_penalty': 1.1,
-            'max_tokens': 32768,
+            'max_tokens': 32768, ### 模型默认最大的长度一般是8192,设置模型的最大长度 --max-model-len=40960 (模型config.json的 max_position_embeddings)
             'stream_options': {
                 'include_usage': True,
             },
@@ -88,12 +88,13 @@ User: '''
 
 def app_gui():
     agents = []
-    for name, port, desc, reasoning, max_llm_calls, tools in [
-        ('WebDancer-QwQ-32B', 8004, '...', True, 50, ['search', 'visit']),
+    for model, base_url, api_key,desc, reasoning, max_llm_calls, tools in [
+        ('WebDancer-QwQ-32B', 'http://127.0.0.1:8004/v1','EMPTY', '...', True, 50, ['search', 'visit']),
     ]:
         search_bot_dev = init_dev_search_agent_service(
-            name=name,
-            port=port,
+            model=model,
+            base_url=base_url,
+            api_key=api_key,
             desc=desc,
             reasoning=reasoning,
             max_llm_calls=max_llm_calls,
@@ -129,7 +130,7 @@ def app_gui():
     ).run(
         message=messages,
         share=False,
-        server_name='127.0.0.1',
+        server_name='0.0.0.0', ## 放开IP访问限制
         server_port=7860,
         concurrency_limit=20,
         enable_mention=False,

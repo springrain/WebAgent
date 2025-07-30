@@ -89,7 +89,7 @@ User: '''
 def app_gui():
     agents = []
     for model, base_url, api_key,desc, reasoning, max_llm_calls, tools in [
-        ('WebDancer-QwQ-32B', 'http://127.0.0.1:8004/v1','EMPTY', '...', True, 50, ['search', 'visit']),
+        (os.getenv('WEbDANCER_MODEL'), os.getenv('WEbDANCER_BASE_URL'),os.getenv('WEbDANCER_API_KEY'), '...', True, 50, ['search', 'visit']),
     ]:
         search_bot_dev = init_dev_search_agent_service(
             model=model,

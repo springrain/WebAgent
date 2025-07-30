@@ -51,7 +51,7 @@ def jina_readpage(url: str) -> str:
     for attempt in range(max_retries):
         try:
             response = requests.get(
-                f"https://r.jina.ai/{url}",
+                f"{os.getenv("JINA_API_URL")}{url}",
                 headers=headers,
                 timeout=timeout
             )

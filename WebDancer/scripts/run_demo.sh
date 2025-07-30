@@ -4,8 +4,11 @@ cd $(dirname $0) || exit
 
 # GOOGLE_SEARCH_KEY
 export GOOGLE_SEARCH_KEY=''
+export SEARCH_API_URL='https://google.serper.dev/search'
+
 # JINA
 export JINA_API_KEY=''
+export JINA_API_URL='https://r.jina.ai/'
 # OPENAI 优先使用OpenAI接口
 export OPENAI_API_KEY=''
 export OPENAI_BASE_URL='https://api.openai.com/v1'

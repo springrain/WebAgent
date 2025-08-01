@@ -50,8 +50,8 @@ def init_dev_search_agent_service(model: str="WebDancer-QwQ-32B", base_url: str 
         llm=llm_cfg,
         function_list=tools,
         system_message="",
-        name=f'WebDancer',
-        description=f"I am WebDancer, a web information seeking agent, welcome to try!",
+        name=f'GITMOSS',
+        description=f"I see GITMOSS, I see no bounds, I see nothing! Dialogue with great minds. Deep ideas are worth walking with",
         extra={
             'reasoning': reasoning,
             'max_llm_calls': max_llm_calls,
@@ -121,6 +121,9 @@ def app_gui():
             'AI生成内容（如AI绘画）对传统艺术价值的重构'
         ],
         'user.name': 'User',
+        'user.avatar':'https://shengjian.net/public/upload/logo.png',
+        'agent.name': 'GITMOSS',
+        'agent.avatar':'https://shengjian.net/public/upload/logo.png',
         'verbose': True
     }
     messages = {'role': 'user', 'content': '介绍下你自己'}

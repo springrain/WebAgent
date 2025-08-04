@@ -52,8 +52,13 @@ class SearchAgent(Assistant):
                 messages.insert(0, Message(role=SYSTEM, content=self.make_system_prompt()))
         for msg in messages:
             if isinstance(msg.content, list):
-                assert len(msg.content) == 1
+                #assert len(msg.content) == 1
+                ## 记录上传的文件路径
+                for i in range(1,len(msg.content)): 
+                  logger.info("上传的文件路径:"+msg.content[i]["file"])
+
                 msg.content = msg.content[0].text
+              
             if msg.role == USER:
                 msg.content = msg.content.strip()
 

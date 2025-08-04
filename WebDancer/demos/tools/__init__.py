@@ -5,5 +5,5 @@ from .private.weather import Weather
 __all__ = [
     'Visit',
     'Search',
-     'Weather',
+    'Weather',
 ]
